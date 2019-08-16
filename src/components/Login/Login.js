@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import styles from './Login.module.css';
-import { getIsAuthorized, addApiKey } from '../../modules/Auth';
+import { getIsAuthorized, addApiKey, getApiKey } from '../../modules/Auth';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
 import Input from '../Input';
@@ -9,7 +9,7 @@ class Login extends PureComponent {
   // на время разработки свой access token можно вставить сюда, чтобы
   // не вводить каждый раз
   state = {
-    key: 'c9dd75d349fb8b4dc2e0929e78fc5223e002cde3'
+    key: 'a0e601006ab4a854888388ded0d47912c520a33f'
   };
 
   input = React.createRef();
@@ -27,13 +27,15 @@ class Login extends PureComponent {
 
   componentDidMount() {
     this.input.current.focus();
+    this.props.addApiKey(this.state.key);
   }
 
   render() {
     const { isAuthorized } = this.props;
     const { key } = this.state;
-
-    //if (isAuthorized) return <Redirect to="/search" />;
+    console.log('this.props', this.props);
+    console.log('isAuthorized', isAuthorized);
+    if (isAuthorized) return <Redirect to="/search" />;
 
     return (
       <div className={styles.root}>
@@ -67,6 +69,9 @@ class Login extends PureComponent {
 }
 
 export default connect(
-  state => ({ isAuthorized: getIsAuthorized(state) }),
+  state => ({
+    isAuthorized: getIsAuthorized(state),
+    ApiKey: getApiKey(state)
+  }),
   { addApiKey }
 )(withRouter(Login));

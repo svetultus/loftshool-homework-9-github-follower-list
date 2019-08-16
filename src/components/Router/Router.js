@@ -7,6 +7,7 @@ import React from 'react';
 import { Link, Route, Switch, Redirect, BrowserRouter } from 'react-router-dom';
 import PrivateRoute from '../PrivateRoute';
 import Login from '../Login';
+import Search from '../Search';
 // import Search from '../Search';
 
 export default () => {
@@ -15,6 +16,7 @@ export default () => {
       <Switch>
         <Route path="/login" component={Login} />
         {/* <PrivateRoute path="/search" component={Search} /> */}
+        <Route path="/search" component={Search} />
         <Redirect path="/" exact to="/login" />
       </Switch>
     </BrowserRouter>
