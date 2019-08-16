@@ -1,14 +1,9 @@
 import { takeLatest, select, put, call, fork } from 'redux-saga/effects';
 
-
 function* fetchUserWatcher() {
-  yield takeLatest(?, fetchUserFlow);
+  yield takeLatest('?', fetchUserFlow);
 }
 
-export function* fetchUserFlow(action) {
+export function* fetchUserFlow(action) {}
 
-}
-
-export default function*() {
-
-}
+export default function*() {}

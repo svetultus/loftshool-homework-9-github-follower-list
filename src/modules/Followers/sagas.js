@@ -1,8 +1,7 @@
 import { takeLatest, select, put, call, fork } from 'redux-saga/effects';
 
-
 function* fetchFollowersWatcher() {
-  yield takeLatest(?, fetchFollowersFlow); // Замените вопросительный знак на подходящий экшен
+  yield takeLatest('?', fetchFollowersFlow); // Замените вопросительный знак на подходящий экшен
 }
 
 export function* fetchFollowersFlow(action) {
