@@ -36,7 +36,7 @@ const error = handleActions(
   null
 );
 
-export const getUserData = createSelector(
+export const getData = createSelector(
   state => state.user.data,
   data => {
     if (!data) return null;

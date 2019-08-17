@@ -1,20 +1,26 @@
 import React, { PureComponent } from 'react';
 import styles from './UserInfo.module.css';
-
+import { getData, getIsLoading, getError } from '../../modules/User';
+import { fetchRequest } from '../../modules/User';
 import { connect } from 'react-redux';
+
+const mapStateToProps = state => ({
+  data: getData(state),
+  isLoading: getIsLoading(state),
+  error: getError(state)
+});
+const mapDispatchToProps = { fetchRequest };
 
 class UserInfo extends PureComponent {
   render() {
-    console.log(this.props);
-    const { isLoading, error, userData } = this.props;
-    if (isLoading) return <div>Данные загружаются</div>;
-    if (error) return <div>{error.toString()}</div>;
-    if (!userData) return null;
-
-    const { login, image, name, summary } = this.props.userData;
-
     // Покажите статус загрузки
     // Если данные не были загружены - сообщите об этом пользователю
+    const { isLoading, error, data } = this.props;
+    if (isLoading) return <div>Данные загружаются</div>;
+    if (error) return <div>{error.toString()}</div>;
+    if (!data) return null;
+
+    const { login, image, name, summary } = data;
 
     return (
       <div className={styles.root}>
@@ -35,4 +41,7 @@ class UserInfo extends PureComponent {
 }
 
 // Используйте поля data, isLoading из стейта
-export default connect(state => ({}))(UserInfo);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserInfo);

@@ -12,9 +12,6 @@ function* fetchUserWatcher() {
 }
 
 export function* fetchUserFlow(action) {
-  // console.log('getApiKey', getApiKey);
-  // const result = yield call(getApiKey);
-  // let state1 = yield select(state => state);
   try {
     let ApiKey = yield select(state => getApiKey(state));
     let data = yield call(getUserInfo, ApiKey, action.payload);
@@ -22,13 +19,6 @@ export function* fetchUserFlow(action) {
   } catch (error) {
     yield put(fetchRequestFailure(error));
   }
-
-  // debugger;
-  // console.log(getApiKey());
-  // getUserInfo(ApiKey, action.payload).then(data => {
-  //   console.log(data);
-  //   yield put(fetchRequestSuccess(data));
-  // });
 }
 
 export default fetchUserWatcher;
