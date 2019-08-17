@@ -18,7 +18,6 @@ export function* fetchUserFlow(action) {
   try {
     let ApiKey = yield select(state => getApiKey(state));
     let data = yield call(getUserInfo, ApiKey, action.payload);
-    console.log('data', data);
     yield put(fetchRequestSuccess(data));
   } catch (error) {
     yield put(fetchRequestFailure(error));

@@ -27,11 +27,14 @@ const data = handleActions(
   null
 );
 
-// const ApiKey = (state => {
-//   console.log(state);
-//   return state;
-// },
-// null);
+const error = handleActions(
+  {
+    [fetchRequest]: state => null,
+    [fetchRequestSuccess]: state => null,
+    [fetchRequestFailure]: (state, action) => action.payload
+  },
+  null
+);
 
 export const getUserData = createSelector(
   state => state.user.data,
@@ -42,4 +45,14 @@ export const getUserData = createSelector(
   }
 );
 
-export default combineReducers({ isLoading, data });
+export const getIsLoading = createSelector(
+  state => state.user.isLoading,
+  isLoading => isLoading
+);
+
+export const getError = createSelector(
+  state => state.user.error,
+  error => error
+);
+
+export default combineReducers({ isLoading, data, error });
