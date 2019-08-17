@@ -16,7 +16,7 @@ function Follower(props) {
   const { login, image } = props;
   return (
     <div className={styles.follower}>
-      <img class={styles.followerImg} src={image} />
+      <img className={styles.followerImg} src={image} />
       <p className={styles.followerLogin}>{login}</p>
     </div>
   );
@@ -36,7 +36,7 @@ class Followers extends PureComponent {
         {data &&
           data.map(follower => {
             const { login, image } = follower;
-            return <Follower login={login} image={image} />;
+            return <Follower key={login} login={login} image={image} />;
           })}
       </div>
     );

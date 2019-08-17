@@ -1,18 +1,14 @@
 import { combineReducers } from 'redux';
 import { handleActions } from 'redux-actions';
-import {
-  fetchRequest,
-  fetchRequestSuccess,
-  fetchRequestFailure
-} from './actions';
+import { fetchRequest, fetchSuccess, fetchFailure } from './actions';
 import { actionChannel } from 'redux-saga/effects';
 import { createSelector } from 'reselect';
 
 const isLoading = handleActions(
   {
     [fetchRequest]: state => true,
-    [fetchRequestSuccess]: state => false,
-    [fetchRequestFailure]: state => false
+    [fetchSuccess]: state => false,
+    [fetchFailure]: state => false
   },
   false
 );
@@ -20,8 +16,8 @@ const isLoading = handleActions(
 const data = handleActions(
   {
     [fetchRequest]: state => null,
-    [fetchRequestSuccess]: (state, action) => action.payload,
-    [fetchRequestFailure]: state => null
+    [fetchSuccess]: (state, action) => action.payload,
+    [fetchFailure]: state => null
   },
   null
 );
@@ -29,8 +25,8 @@ const data = handleActions(
 const error = handleActions(
   {
     [fetchRequest]: state => null,
-    [fetchRequestSuccess]: state => null,
-    [fetchRequestFailure]: (state, action) => action.payload
+    [fetchSuccess]: state => null,
+    [fetchFailure]: (state, action) => action.payload
   },
   null
 );

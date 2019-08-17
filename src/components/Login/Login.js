@@ -4,13 +4,14 @@ import { getIsAuthorized, addApiKey, getApiKey } from '../../modules/Auth';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
 import Input from '../Input';
-import { ApiKey } from './apikey';
+// import { ApiKey } from './apikey';
 
 class Login extends PureComponent {
   // на время разработки свой access token можно вставить сюда, чтобы
   // не вводить каждый раз
   state = {
-    key: ApiKey
+    // key: ApiKey
+    key: ''
   };
 
   input = React.createRef();
@@ -28,14 +29,11 @@ class Login extends PureComponent {
 
   componentDidMount() {
     this.input.current.focus();
-    this.props.addApiKey(this.state.key);
   }
 
   render() {
     const { isAuthorized } = this.props;
     const { key } = this.state;
-    console.log('this.props', this.props);
-    console.log('isAuthorized', isAuthorized);
     if (isAuthorized) return <Redirect to="/search" />;
 
     return (

@@ -1,9 +1,5 @@
 import { takeLatest, select, put, call, fork } from 'redux-saga/effects';
-import {
-  fetchRequest,
-  fetchRequestSuccess,
-  fetchRequestFailure
-} from './actions';
+import { fetchRequest, fetchSuccess, fetchFailure } from './actions';
 import { getFollowersInfo } from './api';
 import { getApiKey } from '../Auth';
 
@@ -15,17 +11,19 @@ export function* fetchFollowersFlow(action) {
   // Реализуйте загрузку данных
   // Используйте экшены FETCH_SUCCESS / FETCH_FAILURE
   try {
-    let ApiKey = yield select(state => getApiKey(state));
-    let data = yield call(getFollowersInfo, ApiKey, action.payload);
+    let ApiKey = yield select(getApiKey);
+    let response = yield call(getFollowersInfo, ApiKey, action.payload);
 
-    data = data.map(elem => {
-      const { avatar_url: image, login } = elem;
-      return { login, image };
-    });
+    if (response.map) {
+      response = response.map(elem => {
+        const { avatar_url: image, login } = elem;
+        return { login, image };
+      });
+    }
 
-    yield put(fetchRequestSuccess(data));
+    yield put(fetchSuccess(response));
   } catch (error) {
-    yield put(fetchRequestFailure(error));
+    yield put(fetchFailure(error));
   }
 }
 

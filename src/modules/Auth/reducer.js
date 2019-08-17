@@ -10,15 +10,11 @@ import { createSelector } from 'reselect';
 
 const isAuthorized = handleActions(
   {
-    [addApiKey]: (state, action) => {
-      console.log(state);
-
-      return action.payload !== '' ? true : false;
-    }
+    [addApiKey]: (state, action) => (action.payload !== '' ? true : false)
   },
   false
 );
-const ApiKey = handleActions(
+const apiKey = handleActions(
   {
     [addApiKey]: (state, action) => action.payload
   },
@@ -31,8 +27,8 @@ export const getIsAuthorized = createSelector(
 );
 
 export const getApiKey = createSelector(
-  state => state.auth.ApiKey,
-  ApiKey => ApiKey
+  state => state.auth.apiKey,
+  apiKey => apiKey
 );
 
-export default combineReducers({ isAuthorized, ApiKey });
+export default combineReducers({ isAuthorized, apiKey });

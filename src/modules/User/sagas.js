@@ -1,9 +1,5 @@
 import { takeLatest, select, put, call, fork } from 'redux-saga/effects';
-import {
-  fetchRequest,
-  fetchRequestSuccess,
-  fetchRequestFailure
-} from './actions';
+import { fetchRequest, fetchSuccess, fetchFailure } from './actions';
 import { getUserInfo } from './api';
 import { getApiKey } from '../Auth';
 
@@ -13,11 +9,11 @@ function* fetchUserWatcher() {
 
 export function* fetchUserFlow(action) {
   try {
-    let ApiKey = yield select(state => getApiKey(state));
+    let ApiKey = yield select(getApiKey);
     let data = yield call(getUserInfo, ApiKey, action.payload);
-    yield put(fetchRequestSuccess(data));
+    yield put(fetchSuccess(data));
   } catch (error) {
-    yield put(fetchRequestFailure(error));
+    yield put(fetchFailure(error));
   }
 }
 

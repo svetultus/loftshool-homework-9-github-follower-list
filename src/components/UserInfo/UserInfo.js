@@ -20,7 +20,7 @@ class UserInfo extends PureComponent {
     if (error) return <div>{error.toString()}</div>;
     if (!data) return null;
 
-    const { login, image, name, summary } = data;
+    const { image, name, summary } = data;
 
     return (
       <div className={styles.root}>
