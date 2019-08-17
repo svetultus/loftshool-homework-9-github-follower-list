@@ -4,12 +4,13 @@ import { getIsAuthorized, addApiKey, getApiKey } from '../../modules/Auth';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
 import Input from '../Input';
+import { ApiKey } from './apikey';
 
 class Login extends PureComponent {
   // на время разработки свой access token можно вставить сюда, чтобы
   // не вводить каждый раз
   state = {
-    key: 'a0e601006ab4a854888388ded0d47912c520a33f'
+    key: ApiKey
   };
 
   input = React.createRef();

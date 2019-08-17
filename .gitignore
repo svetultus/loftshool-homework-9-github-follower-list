@@ -31,3 +31,5 @@ cypress/screenshots
 
 plopfile.js
 /plop-templates
+
+/src/components/Login/apikey.js

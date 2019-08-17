@@ -5,8 +5,15 @@ import { connect } from 'react-redux';
 import { fetchRequest as fetchUserRequest } from '../../modules/User';
 import { fetchRequest as fetchFollowersRequest } from '../../modules/Followers';
 import { getApiKey } from '../../modules/Auth';
+import { getUserData } from '../../modules/User';
 import UserInfo from '../UserInfo';
 import Followers from '../Followers';
+
+const mapStateToProps = state => ({
+  ApiKey: getApiKey(state),
+  userData: getUserData(state)
+});
+const mapDispatchToProps = { fetchUserRequest, fetchFollowersRequest };
 
 class Search extends PureComponent {
   state = {
@@ -35,6 +42,7 @@ class Search extends PureComponent {
 
   render() {
     const { user } = this.state;
+    console.log(this.props);
 
     return (
       <div className={styles.root}>
@@ -46,7 +54,7 @@ class Search extends PureComponent {
           onChange={this.handleChange}
           onKeyPress={this.handleKeyPress}
         />
-        <UserInfo />
+        <UserInfo userData={this.props.userData} />
         <Followers />
       </div>
     );
@@ -54,6 +62,6 @@ class Search extends PureComponent {
 }
 
 export default connect(
-  state => ({ ApiKey: getApiKey(state) }),
-  { fetchUserRequest, fetchFollowersRequest }
+  mapStateToProps,
+  mapDispatchToProps
 )(Search);

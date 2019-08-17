@@ -16,10 +16,7 @@ export function* fetchUserFlow(action) {
   // const result = yield call(getApiKey);
   // let state1 = yield select(state => state);
   try {
-    console.log(action);
     let ApiKey = yield select(state => getApiKey(state));
-    console.log('ApiKey', ApiKey);
-
     let data = yield call(getUserInfo, ApiKey, action.payload);
     console.log('data', data);
     yield put(fetchRequestSuccess(data));
