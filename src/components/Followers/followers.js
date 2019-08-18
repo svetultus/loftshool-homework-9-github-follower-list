@@ -29,7 +29,8 @@ class Followers extends PureComponent {
     const { isLoading, error, data } = this.props;
     if (isLoading) return <div>Данные загружаются</div>;
     if (error) return <p>{error.toString()}</p>;
-    if (!data) return null;
+    if (!data)
+      return <p className="t-no-followers">Нет информации о подписчиках</p>;
 
     return (
       <div className={cx(styles.root, 't-followers')}>

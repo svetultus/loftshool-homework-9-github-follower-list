@@ -18,7 +18,8 @@ class UserInfo extends PureComponent {
     const { isLoading, error, data } = this.props;
     if (isLoading) return <div>Данные загружаются</div>;
     if (error) return <p>{error.toString()}</p>;
-    if (!data) return null;
+    if (!data)
+      return <p className="t-no-user-info">Нет информации о пользователе</p>;
 
     const { image, name, summary } = data;
 
