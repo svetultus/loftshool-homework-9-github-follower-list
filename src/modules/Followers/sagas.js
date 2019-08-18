@@ -20,10 +20,9 @@ export function* fetchFollowersFlow(action) {
         return { login, image };
       });
     }
-
     yield put(fetchSuccess(response));
   } catch (error) {
-    yield put(fetchFailure(error));
+    yield put(fetchFailure(error.message));
   }
 }
 

@@ -13,7 +13,7 @@ export function* fetchUserFlow(action) {
     let data = yield call(getUserInfo, ApiKey, action.payload);
     yield put(fetchSuccess(data));
   } catch (error) {
-    yield put(fetchFailure(error));
+    yield put(fetchFailure(error.message));
   }
 }
 

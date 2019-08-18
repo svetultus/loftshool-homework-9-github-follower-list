@@ -28,12 +28,12 @@ class Followers extends PureComponent {
     // Если данные не были загружены - сообщите об этом пользователю
     const { isLoading, error, data } = this.props;
     if (isLoading) return <div>Данные загружаются</div>;
-    if (error) return <div>{error.toString()}</div>;
+    if (error) return <p>{error.toString()}</p>;
     if (!data) return null;
 
     return (
       <div className={cx(styles.root, 't-followers')}>
-        {data &&
+        {data.map &&
           data.map(follower => {
             const { login, image } = follower;
             return <Follower key={login} login={login} image={image} />;

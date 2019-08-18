@@ -17,7 +17,7 @@ class UserInfo extends PureComponent {
     // Если данные не были загружены - сообщите об этом пользователю
     const { isLoading, error, data } = this.props;
     if (isLoading) return <div>Данные загружаются</div>;
-    if (error) return <div>{error.toString()}</div>;
+    if (error) return <p>{error.toString()}</p>;
     if (!data) return null;
 
     const { image, name, summary } = data;
