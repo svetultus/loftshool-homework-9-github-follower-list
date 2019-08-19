@@ -4,8 +4,14 @@ import Input from '../Input';
 import { connect } from 'react-redux';
 import { fetchRequest as fetchUserRequest } from '../../modules/User';
 import { fetchRequest as fetchFollowersRequest } from '../../modules/Followers';
+import { getApiKey } from '../../modules/Auth';
 import UserInfo from '../UserInfo';
 import Followers from '../Followers';
+
+const mapStateToProps = state => ({
+  ApiKey: getApiKey(state)
+});
+const mapDispatchToProps = { fetchUserRequest, fetchFollowersRequest };
 
 class Search extends PureComponent {
   state = {
@@ -40,7 +46,7 @@ class Search extends PureComponent {
         <Input
           ref={this.input}
           value={user}
-          className='t-search-input'
+          className="t-search-input"
           placeholder="Ник пользователя"
           onChange={this.handleChange}
           onKeyPress={this.handleKeyPress}
@@ -53,6 +59,6 @@ class Search extends PureComponent {
 }
 
 export default connect(
-  undefined,
-  { fetchUserRequest, fetchFollowersRequest }
+  mapStateToProps,
+  mapDispatchToProps
 )(Search);

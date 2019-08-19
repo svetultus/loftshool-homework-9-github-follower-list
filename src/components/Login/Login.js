@@ -1,14 +1,16 @@
 import React, { PureComponent } from 'react';
 import styles from './Login.module.css';
-import { getIsAuthorized, addApiKey } from '../../modules/Auth';
+import { getIsAuthorized, addApiKey, getApiKey } from '../../modules/Auth';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router-dom';
 import Input from '../Input';
+// import { ApiKey } from './apikey';
 
 class Login extends PureComponent {
   // на время разработки свой access token можно вставить сюда, чтобы
   // не вводить каждый раз
   state = {
+    // key: ApiKey
     key: ''
   };
 
@@ -32,7 +34,6 @@ class Login extends PureComponent {
   render() {
     const { isAuthorized } = this.props;
     const { key } = this.state;
-
     if (isAuthorized) return <Redirect to="/search" />;
 
     return (
@@ -55,7 +56,7 @@ class Login extends PureComponent {
           ref={this.input}
           value={key}
           placeholder="access token"
-          className='t-login-input'
+          className="t-login-input"
           onChange={this.handleChange}
           onKeyPress={this.handleKeyPress}
         />
@@ -67,6 +68,9 @@ class Login extends PureComponent {
 }
 
 export default connect(
-  state => ({ isAuthorized: getIsAuthorized(state) }),
+  state => ({
+    isAuthorized: getIsAuthorized(state),
+    ApiKey: getApiKey(state)
+  }),
   { addApiKey }
 )(withRouter(Login));
